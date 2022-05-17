@@ -35,7 +35,7 @@ int _putchar(int c)
 int _puts(char *str)
 {
 int i;
-for(i = 0; str[i]; i++)
+for (i = 0; str[i]; i++)
 	_putchar(str[i]);
-return(i);
+return (i);
 }
