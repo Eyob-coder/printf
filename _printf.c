@@ -34,9 +34,9 @@ int _printf(const char *format, ...)
 /**
  * format_values - format string
  * @list: list of args
- * @format: format string
+ * @format: string format
  * @printed: number of chars printed
- * @count: count iterator
+ * @count: iterator count
  * Return: pointer to func that correspond to operator
  */
 void format_values(va_list list, const char *format, int *printed, int *count)
@@ -85,7 +85,7 @@ void format_values(va_list list, const char *format, int *printed, int *count)
 /**
  * format_int - test number formats
  * @list: list of args
- * @printed: pointer to amount of printed chars
+ * @printed: pointer to amountprinted chars
  * Return: void
  */
 void format_int(va_list list, int *printed)
