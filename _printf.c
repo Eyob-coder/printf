@@ -1,12 +1,44 @@
 #include <stdarg.h>
 #include "main.h"
 /**
+ *_prinf - print formated strings
+ *@format: format of the string
+ *Return: number of character printed
+ */
+
+int _printf(const char *format, ...)
+{
+	va_list list;
+	int count = 0, printed = 0;
+
+	if (!format)
+		return (-1);
+	va_start(list, format);
+	while (format && format[count])
+	{
+		if (format[count] == '%')
+		{
+			if (format[count + 1] == '\0')
+				return (-1);
+			format_val(list, format, &printed, &count);
+		}
+		else
+		{
+			_putchar(format[count]);
+			printed += 1;
+			count += 1;
+		}
+	}
+	va_end(list);
+	return (printed);
+}
+/**
  * format_val - format string
  * @list: list of args
- * @printed: number of printed chars
- * @format: string format
- * @count: iterator count
- * return: operator that coresponds to a function pointer
+ * @format: format string
+ * @printed: number of chars printed
+ * @count: count iterator
+ * Return: pointer to func that correspond to operator
  */
 void format_val(va_list list, const char *format, int *printed, int *count)
 {
@@ -52,41 +84,38 @@ void format_val(va_list list, const char *format, int *printed, int *count)
 		*count += 2;
 }
 /**
- * -printf - print any formated string
- * @format: string format
- * return: the number of the character printed
+ * format_string - test string format
+ * @list: list of argument
+ * @printed: pointer to printed chars
+ * Return: void
  */
-int _printf(const char *format, ...)
+void format_string(va_list list, int *printed, char sr)
 {
-	va_list list;
-	int count = 0, printed = 0;
+        char *s;
+        s = va_arg(list, char *);
 
-	if (!format)
-		return (-1);
-	va_start(list, format);
-	while (format && format[count])
-	{
-		if (format[count] == '%')
-		{
-			if (format[count + 1] == '\0')
-				return (-1);
-			format_values(list, format, &printed, &count);
-		}
-		else
-		{
-			_putchar(format[count]);
-			printed += 1;
-			count += 1;
-		}
-	}
-	va_end(list);
-	return (printed);
-}
+        if (s)
+        {
+                *printed += _strlen(s);
+                if (sr == 's')
+                        _puts(s);
+                else
+                        _printstr(s);
+        }
+        else
+        {
+                *printed += _strlen("(null)");
+                if (sr == 's')
+                        _puts("(null)");
+                else
+                        _printstr("(null)");
+        }
+
 /**
- * format_int - test number formats
- * @list: args list
- * @printed: pointer to amount of printed chars
- * return void
+ * format_int - tests formats
+ * @list: list of argument
+ * @printed: pointer to printed chars
+ * Return: void
  */
 void format_int(va_list list, int *printed)
 {
@@ -97,31 +126,4 @@ void format_int(va_list list, int *printed)
 	_printd(num);
 	*printed += _numlen(num);
 }
-/**
- * format_string - test string format
- * @list: list of args
- * @printed: pointer to amount of printed chars
- * Return: void
- */
-void format_string(va_list list, int *printed, char sr)
-{
-	char *s;
-	s = va_arg(list, char *);
-
-	if (s)
-	{
-		*printed += _strlen(s);
-		if (sr == 's')
-			_puts(s);
-		else
-			_printstr(s);
-	}
-	else
-	{
-		*printed += _strlen("(null)");
-		if (sr == 's')
-			_puts("(null)");
-		else
-			_printstr("(null)");
-	}
 }
