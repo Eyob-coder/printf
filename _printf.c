@@ -33,11 +33,11 @@ int _printf(const char *format, ...)
 }
 /**
  * format_values - format string
- * @list: list of args
+ * @list: list of arguments
  * @format: format string
- * @printed: number of chars printed
- * @count: count iterator
- * Return: pointer to func that correspond to operator
+ * @printed: chars printed
+ * @count: count
+ * Return: pointer
  */
 void format_values(va_list list, const char *format, int *printed, int *count)
 {
@@ -83,9 +83,41 @@ void format_values(va_list list, const char *format, int *printed, int *count)
 		*count += 2;
 }
 /**
+ *format_values - format
+ *@list: List of arguments
+ *@printed: char printed
+ *@count: counter
+ *Return: pointer
+ */
+void format_string(va_list list, int *printed, char sr)
+{
+        char *s;
+
+        s = va_arg(list, char *);
+        if (s)
+        {
+                *printed += _strlen(s);
+                if (sr == 's')
+                        _puts(s);
+                else
+                        _printstr(s);
+        }
+
+        else
+        {
+                *printed += _strlen("(null)");
+                if (sr == 's')
+                        _puts("(null)");
+                else
+                        _printstr("(null)");
+        }
+}
+
+
+/**
  * format_int - test number formats
- * @list: list of args
- * @printed: pointer to amount of printed chars
+ * @list: list of arguments
+ * @printed: pointer chars
  * Return: void
  */
 void format_int(va_list list, int *printed)
@@ -96,34 +128,4 @@ void format_int(va_list list, int *printed)
 		*printed += 1;
 	_printd(num);
 	*printed += _numlen(num);
-}
-/**
- * format_string - test string format
- * @list: list of args
- * @printed: pointer to amount of printed chars
- * @sr: character string
- * Return: void
- */
-void format_string(va_list list, int *printed, char sr)
-{
-	char *s;
-
-	s = va_arg(list, char *);
-	if (s)
-	{
-		*printed += _strlen(s);
-		if (sr == 's')
-			_puts(s);
-		else
-			_printstr(s);
-	}
-
-	else
-	{
-		*printed += _strlen("(null)");
-		if (sr == 's')
-			_puts("(null)");
-		else
-			_printstr("(null)");
-	}
 }
