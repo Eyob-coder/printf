@@ -107,8 +107,8 @@ void format_int(va_list list, int *printed)
 void format_string(va_list list, int *printed, char sr)
 {
 	char *s;
-	s = va_arg(list, char *);
 
+	s = va_arg(list, char *);
 	if (s)
 	{
 		*printed += _strlen(s);
