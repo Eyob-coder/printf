@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 		{
 			if (format[count + 1] == '\0')
 				return (-1);
-			format_val(list, format, &printed, &count);
+			format_values(list, format, &printed, &count);
 		}
 		else
 		{
@@ -33,14 +33,14 @@ int _printf(const char *format, ...)
 	return (printed);
 }
 /**
- * format_val - format string
+ * format_values - format string
  * @list: list of args
  * @format: format string
  * @printed: number of chars printed
  * @count: count iterator
  * Return: pointer to func that correspond to operator
  */
-void format_val(va_list list, const char *format, int *printed, int *count)
+void format_values(va_list list, const char *format, int *printed, int *count)
 {
 	int f = 0, tobi = 0, tooc = 0;
 	unsigned int num = 0;
