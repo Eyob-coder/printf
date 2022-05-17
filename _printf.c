@@ -112,6 +112,7 @@ void format_string(va_list list, int *printed, char sr)
 	if (s)
 	{
 		*printed += _strlen(s);
+
 		if (sr == 's')
 			_puts(s);
 		else
